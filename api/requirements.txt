@@ -1,2 +1,4 @@
 fastapi==0.68.0
-unicorn==1.0.3
+psycopg2==2.9.1
+SQLAlchemy==1.4.22
+uvicorn==0.14.0
