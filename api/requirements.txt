@@ -1,0 +1,2 @@
+fastapi==0.68.0
+unicorn==1.0.3
