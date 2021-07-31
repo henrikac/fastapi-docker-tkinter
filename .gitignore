@@ -6,3 +6,6 @@ venv/
 
 # Python
 __pycache__/
+
+# Database (docker)
+data/
