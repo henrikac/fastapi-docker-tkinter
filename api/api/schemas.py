@@ -4,6 +4,7 @@ from pydantic import BaseModel, HttpUrl
 class ShortURLBase(BaseModel):
     url: str
     path: str
+    redirects: int
 
 
 class ShortURLCreate(BaseModel):

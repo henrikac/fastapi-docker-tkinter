@@ -14,3 +14,8 @@ def create_short_url(db: Session, short_url: schemas.ShortURLCreate, path: str):
     db.refresh(db_url)
     return db_url
 
+
+def update_short_url_redirects(db: Session, short_url: schemas.ShortURL):
+    short_url.redirects += 1
+    db.commit()
+
