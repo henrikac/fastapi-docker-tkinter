@@ -3,6 +3,10 @@ from sqlalchemy.orm import Session
 from . import models, schemas
 
 
+def get_short_urls(db: Session):
+    return db.query(models.ShortURL).all()
+
+
 def get_short_url_by_path(db: Session, path: str):
     return db.query(models.ShortURL).filter(models.ShortURL.path == path).first()
 

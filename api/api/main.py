@@ -44,7 +44,7 @@ def get_db():
 
 
 @app.post('/', response_model=schemas.ShortURL)
-async def add(url: schemas.ShortURLCreate, db: Session = Depends(get_db)):
+async def add_short_url(url: schemas.ShortURLCreate, db: Session = Depends(get_db)):
     path = ''.join(random.choices(
         string.ascii_letters + string.digits,
         k=PATH_LENGTH
@@ -58,8 +58,13 @@ async def add(url: schemas.ShortURLCreate, db: Session = Depends(get_db)):
     return crud.create_short_url(db, url, path)
 
 
+@app.get('/urls', response_model=List[schemas.ShortURL])
+async def get_all_urls(db: Session = Depends(get_db)):
+    return crud.get_short_urls(db)
+
+
 @app.get('/{path}')
-async def redirect(path: str, db: Session = Depends(get_db)):
+async def redirect_to_path(path: str, db: Session = Depends(get_db)):
     if len(path) != PATH_LENGTH:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
