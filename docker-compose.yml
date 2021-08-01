@@ -3,10 +3,17 @@ version: "3.9"
 services:
   api:
     build: ./api
+    container_name: urlshortener_api
     ports:
       - "8000:8000"
     depends_on:
       - db
+    environment:
+      DB_HOST: "pgdb"
+      DB_PORT: "5432"
+      DB_NAME: "postgres"
+      DB_USER: "postgres"
+      DB_PASS: "postgres"
   db:
     image: postgres
     container_name: pgdb
