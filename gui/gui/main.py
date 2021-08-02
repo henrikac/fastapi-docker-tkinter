@@ -3,7 +3,6 @@ import tkinter as tk
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from tkinter import ttk
-from typing import List
 from urllib import parse, request
 
 
@@ -73,11 +72,9 @@ class App:
 
     def fetch_urls(self):
         res = request.urlopen('http://localhost:8000/urls')
-        data = res.read().decode('UTF-8')
-        urls: List[ShortURL] = []
-        for item in json.loads(data):
-            urls.append(ShortURL(**item))
-        return urls
+        json_str = res.read().decode('UTF-8')
+        data = json.loads(json_str)
+        return [ShortURL(**item) for item in data]
 
     def add_url(self):
         data = json.dumps({'url': self.ui.input_field.get()}).encode('UTF-8')
